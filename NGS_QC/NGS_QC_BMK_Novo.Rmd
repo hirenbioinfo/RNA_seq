@@ -1,0 +1,82 @@
+---
+title: "RNA-Seq Comparison Plots: BMK vs. Novogene"
+date: "June 16, 2023"
+author:
+  - name: Hiren Ghosh
+    affiliation: Uniklinik Freiburg
+
+output:
+  html_notebook:
+    toc: true
+header-includes:
+  - \usepackage{sectsty}
+  - \sectionfont{\fontsize{16}{18}\selectfont}
+---
+
+# Description 
+
+This script generates paired bar plots and performs pairwise t-tests to compare RNA-Seq data between BMK and Novogene. It reads the data from a TSV file and creates plots with p-values displayed on the plots. The resulting plots are saved as a PDF file.
+
+# Required Libraries
+
+- tidyverse: for data manipulation and visualization
+- ggpubr: for creating paired plots and adding statistical tests
+
+# Assumptions
+
+- The input data file "BMK_Novogene_cmp - RNA_Seq_modified.tsv" is located in the working directory.
+- The data file contains the following columns: "File Name", "Company", and measurement variables.
+
+# R Code
+
+```{r}
+# Load required libraries
+library(tidyverse)
+library(ggpubr)
+
+# Define your working directory
+working_directory <- "/Users/hirenghosh/Project/CRL/BMK_NOVO_comp"
+
+# Set the working directory
+setwd(working_directory)
+
+# Read the data
+data <- read_tsv("BMK_Novogene_cmp - RNA_Seq_modified.tsv")
+
+# Convert the relevant columns to millions
+data$Total_ReadsBefore_Filtering <- data$Total_ReadsBefore_Filtering / 1e6
+data$Total_Reads_After_Filtering <- data$Total_Reads_After_Filtering / 1e6
+
+# Identify the columns that contain the measurements you want to compare
+measure_cols <- names(data)[3:(ncol(data)-1)]
+
+# Open a PDF file for the plots
+pdf("All_plots2.pdf")
+
+# Loop through each column
+for (col in measure_cols) {
+  # Create the paired plot
+  p <- ggpaired(data, x = "Comapny",
+                y = col,
+                color = "Comapny", line.color = "gray", line.size = 0.4,
+                palette = "npg") +
+    ggtitle(paste("Comparison of", col, "between BMK and Novogene")) +
+    ylab("Value")
+  
+  # Adjust the y-axis label based on the column
+  if (col %in% c("Total_ReadsBefore_Filtering", "Total_Reads_After_Filtering")) {
+    p <- p + ylab("Value (million)")
+  } else if (col == "Total_yield_before_filtering") {
+    p <- p + ylab("Value (GB)")
+  } else if (col %in% c("Low_Quality_Reads", "Reads_with_too_many_N")) {
+    p <- p + ylab("Value (%)")
+  } else if (col %in% c("Q30_Bases_Before_Filtering", "Q30_Bases_After_Filtering", "Duplicate_ratio", "GC_Content")) {
+    p <- p + ylab("Value (%)")
+  }
+  
+  # Print the plot to the PDF file
+  print(p)
+}
+
+# Close the PDF file
+dev.off()
