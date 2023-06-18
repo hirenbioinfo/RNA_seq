@@ -24,7 +24,7 @@ This script generates paired bar plots and performs pairwise t-tests to compare 
 
 # Assumptions
 
-- The input data was generated using fastp analysis and later the result json files were processed using python
+- The input fastq qualiy control data was generated using fastp analysis and later the result json files were processed using python.
 - The input data file "BMK_Novogene_cmp - RNA_Seq_modified.tsv" is located in the working directory.
 - The data file contains the following columns: "File Name", "Company", and measurement variables.
 
