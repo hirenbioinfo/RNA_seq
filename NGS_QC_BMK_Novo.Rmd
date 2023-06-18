@@ -1,5 +1,5 @@
 ---
-title: "RNA-Seq Comparison Plots: BMK vs. Novogene"
+title: "RNA-Seq Comparison Plots: XXY vs. YYY"
 date: "June 16, 2023"
 author:
   - name: Hiren Ghosh
@@ -35,13 +35,13 @@ library(tidyverse)
 library(ggpubr)
 
 # Define your working directory
-working_directory <- "/Users/hirenghosh/Project/CRL/BMK_NOVO_comp"
+working_directory <- "/Users/XXXX/Project/XXXXX/XXXXX"
 
 # Set the working directory
 setwd(working_directory)
 
 # Read the data
-data <- read_tsv("BMK_Novogene_cmp - RNA_Seq_modified.tsv")
+data <- read_tsv("XXX_Novogene_cmp - RNA_Seq_modified.tsv")
 
 # Convert the relevant columns to millions
 data$Total_ReadsBefore_Filtering <- data$Total_ReadsBefore_Filtering / 1e6
