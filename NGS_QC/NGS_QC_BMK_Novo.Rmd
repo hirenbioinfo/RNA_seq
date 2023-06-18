@@ -1,5 +1,5 @@
 ---
-title: "RNA-Seq Comparison Plots: BMK vs. Novogene"
+title: "RNA-Seq Comparison Plots: BMX vs. NoX"
 date: "June 16, 2023"
 author:
   - name: Hiren Ghosh
@@ -36,7 +36,7 @@ library(tidyverse)
 library(ggpubr)
 
 # Define your working directory
-working_directory <- "/Users/hirenghosh/Project/CRL/BMK_NOVO_comp"
+working_directory <- "/Users/XXX/Project/CRL/BMK_NOVO_comp"
 
 # Set the working directory
 setwd(working_directory)
