@@ -4,12 +4,18 @@ This script generates a volcano plot for RNA-seq gene expression analysis. It vi
 
 ## Prerequisites
 
+### Run locally on R studio
 Before running the script, make sure you have the following software and R packages installed:
 
 - R (version 1.3.959 or higher)
 - tidyverse
 - RColorBrewer
 - ggrepel
+
+### Run on google collab
+You can open the volcanoplot.ipynb by clicking. It will open the notebook on google colab
+
+- Upload the DGE expression file on google colab and run 
 
 ## Usage
 
